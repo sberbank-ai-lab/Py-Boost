@@ -11,3 +11,4 @@ pip install -U cupy-cuda110
 poetry lock
 poetry install
 poetry build
+poetry publish
