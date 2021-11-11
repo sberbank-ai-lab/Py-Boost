@@ -3,6 +3,7 @@ __pycache__/
 multioutpout_benchmark/
 data/
 catboost_info/
+py_boost_venv
 *.py[cod]
 *$py.class
 

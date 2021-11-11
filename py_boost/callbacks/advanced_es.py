@@ -1,5 +1,5 @@
 import cupy as cp
-from utils import logging
+import logging
 import numpy as np
 
 from numba import njit

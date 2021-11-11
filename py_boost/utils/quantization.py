@@ -1,4 +1,4 @@
-from typing import Optional
+"""Functions for features quantization"""
 
 import numba
 import numpy as np
@@ -8,6 +8,20 @@ numba.config.THREADING_LAYER = 'threadsafe'
 
 
 def quantize_1d(X, X_sampled, max_bins, X_enc, i, borders, neg_inf_clip_value):
+    """Quantize and fill encoded features and borders
+
+    Args:
+        X: np.ndarray, raw features to transform
+        X_sampled: np.ndarray, raw features to split
+        max_bins: int, maximum number of bin counts
+        X_enc: np.ndarray, placeholder for quantized data
+        i: int, index of feature to handle
+        borders: np.ndarray, placeholder for borders
+        neg_inf_clip_value: float, minimum value to clip
+
+    Returns:
+
+    """
     x_sample = X_sampled[:, i]
     x_sample = x_sample[~np.isnan(x_sample)]
     x_sample[x_sample < neg_inf_clip_value] = neg_inf_clip_value
@@ -43,6 +57,18 @@ numba_quantize_1d = njit(sign, parallel=False)(quantize_1d)
 
 
 def _quantize_features(X, X_enc, max_bins, sample, neg_inf_clip_value):
+    """
+
+    Args:
+        X:
+        X_enc:
+        max_bins:
+        sample:
+        neg_inf_clip_value:
+
+    Returns:
+
+    """
     borders = np.empty((X.shape[1], max_bins), dtype=X.dtype)
     borders[:] = np.nan
 
@@ -67,15 +93,15 @@ sign = [(float64[:, :], uint8[:, :], int64, int64, float64),
 numba_quantize_features = njit(sign, parallel=True)(_quantize_features)
 
 
-def quantize_features(X: np.ndarray, max_bins: int = 255, sample: Optional[int] = None, random_state: int = 42):
+def quantize_features(X, max_bins=255, sample=None, random_state=42):
     """
     Perform feature quantization
 
     Args:
-        X:
-        max_bins:
-        sample:
-        random_state:
+        X: np.ndarray, raw features
+        max_bins: int, maximum number of bins, <= 255
+        sample: int, sample size for bins construction
+        random_state: int, random state to sample bins construction sample
 
     Returns:
 

@@ -10,7 +10,7 @@ from .utils import pad_and_move
 from ..callbacks.callback import EarlyStopping, EvalHistory, CallbackPipeline
 from ..multioutput.sketching import GradSketch
 from ..sampling.bagging import BaseSampler
-from ..sampling.target_splitter import SingleSplitter, OneVsAllSplitter
+from ..multioutput.target_splitter import SingleSplitter, OneVsAllSplitter
 from ..utils.quantization import quantize_features, apply_borders
 
 
@@ -30,7 +30,7 @@ class GradientBoosting(Ensemble):
                  subsample=1.,
                  quant_sample=100000,
                  target_splitter='Single',
-                 multioutput_proxy=None,
+                 multioutput_sketch=None,
                  es=100,
                  seed=42,
                  verbose=10,
@@ -54,7 +54,7 @@ class GradientBoosting(Ensemble):
             quant_sample: int, subsample to quantize features
             target_splitter: str or Callable, target splitter, defined multioutput strategy:
                 'Single', 'OneVsAll' or custom
-            multioutput_proxy: None or Callable. Defines the sketching strategy to simplify scoring function
+            multioutput_sketch: None or Callable. Defines the sketching strategy to simplify scoring function
                 in multioutput case. If None full scoring function is used
             es: int, early stopping rounds. If 0, no early stopping
             seed: int, random state
@@ -88,9 +88,9 @@ class GradientBoosting(Ensemble):
 
         self.target_splitter = splitter
 
-        self.multioutput_proxy = multioutput_proxy
-        if multioutput_proxy is None:
-            self.multioutput_proxy = GradSketch()
+        self.multioutput_sketch = multioutput_sketch
+        if multioutput_sketch is None:
+            self.multioutput_sketch = GradSketch()
 
         self.quant_sample = quant_sample
         self.es = es
@@ -114,7 +114,7 @@ class GradientBoosting(Ensemble):
             self.subsample,
             self.colsample,
             self.target_splitter,
-            self.multioutput_proxy,
+            self.multioutput_sketch,
             *([] if callbacks is None else callbacks)
         )
 
@@ -253,7 +253,7 @@ class GradientBoosting(Ensemble):
                                        colsampler=self.colsample,
                                        subsampler=self.subsample,
                                        target_splitter=self.target_splitter,
-                                       multioutput_sketch=self.multioutput_proxy,
+                                       multioutput_sketch=self.multioutput_sketch,
                                        lr=self.lr,
                                        min_gain_to_split=self.min_gain_to_split,
                                        min_data_in_leaf=self.min_data_in_leaf,

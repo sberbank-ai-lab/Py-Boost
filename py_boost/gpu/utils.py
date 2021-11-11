@@ -302,7 +302,7 @@ loss_kernel = cp.ElementwiseKernel(
         res[2 * i] = G * G / (H + lambda_l2) + rG * rG / (total_hess - H + lambda_l2);
     }
 
-    if (nan_hess > 0) {
+    if ((nan_hess > 0) and (hess < total_hess)) {
 
         C -= nan_hess / total_hess * nodes_count;
 
@@ -356,7 +356,7 @@ select_among_feature = cp.ElementwiseKernel(
     """
     best_gain = loss[i * binsx2 + best_idx];
     best_split = best_idx / 2;
-    best_nan_left = (bool) (best_idx % 2);
+    best_nan_left = (bool) (1 - best_idx % 2);
 
     """,
 

@@ -325,6 +325,9 @@ metric_alias = {
     'accuracy': AccuracyMetric(),
     'acc': AccuracyMetric(),
 
+    'auc': RocAucMetric(),
+    'roc': RocAucMetric(),
+
     # for regression
     'rmse': RMSEMetric(),
     'l2': RMSEMetric(),
