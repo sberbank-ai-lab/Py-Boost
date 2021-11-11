@@ -22,28 +22,16 @@ Py-boost is a Python-based gradient boosting library which aims at overcoming th
 
 ## Installation
 
-<span style="color:red"><strong>To be done:<strong> add something.</span>
+pip install -U py_boost
 
 
 ## Quick tour
 
-Py-boost is easy to use since it has similar to scikit-learn interface. 
+Py-boost is easy to use since it has similar to scikit-learn interface. For usage example please see:
 
-Task (regression/classification) is determined by a loss function. It is the only argument required. Other optional arguments: MSELoss for simple/multitask regression, BCELoss for binary/multilabel classification, CrossEntropyLoss for multiclassification, Custom for your own task. Trained model may be saved via pickle.
+* ***Tutorial_1_Basics.ipynb*** for simple usage examples
+* ***Tutorial_2_Advanced_multioutput.ipynb*** for advanced multioutput features
 
-
-<span style="color:red"><strong>To be done:<strong> add code.</span>
-
-## Customization
-
-Customization is made via Callback class. One can easily determine actions which need to be done before/after train process or each iteration. Methods get an info dict as input. It contains all the train and validation data and the model state. This data could be accessed and modified in any way.
-  
-<br/>  
-<span style="color:red">
-The following code illustrates how to build a custom column sampling strategy based on estimated feature importance. 
-<br/> 
-<strong>To be done:<strong> add code.
-</span>
 
 
 ## Other Sber AI Lab Projects
