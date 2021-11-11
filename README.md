@@ -35,7 +35,9 @@ Py-boost is easy to use since it has similar to scikit-learn interface. For usag
 
 * [Tutorial_1_Basics](https://github.com/sberbank-ai-lab/Py-Boost/blob/master/Tutorial_1_Basics.ipynb) for simple usage examples
 * [Tutorial_2_Advanced_multioutput](https://github.com/sberbank-ai-lab/Py-Boost/blob/master/Tutorial_2_Advanced_multioutput.ipynb) for advanced multioutput features
-* [Tutorial_3_Custom_features](https://github.com/sberbank-ai-lab/Py-Boost/blob/master/Tutorial_3_Custom_features.ipynb) for advanced multioutput features
+* [Tutorial_3_Custom_features](https://github.com/sberbank-ai-lab/Py-Boost/blob/master/Tutorial_3_Custom_features.ipynb) for examples of customization
+
+More examples are comming soon
 
 
 
